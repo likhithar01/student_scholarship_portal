@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Available Scholarships</h2>
+
+<form method="GET" class="mb-4">
+
+<input type="text" name="q" class="form-control" placeholder="Search scholarship">
+
+<br>
+
+<button class="btn btn-primary">Search</button>
+
+</form>
+
+<div class="row">
+
+{% for s in scholarships %}
+
+<div class="col-md-4">
+
+<div class="card shadow p-3 mb-4">
+
+<h4>{{ s.title }}</h4>
+
+<p>{{ s.description|truncatewords:20 }}</p>
+
+<p><b>Amount:</b> ₹{{ s.amount }}</p>
+
+<p><b>Eligibility:</b> {{ s.eligibility }}</p>
+
+<p><b>Deadline:</b> {{ s.deadline }}</p>
+
+<a href="/scholarships/apply/{{ s.id }}" class="btn btn-success">Apply</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

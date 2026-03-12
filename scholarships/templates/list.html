@@ -1,0 +1,14 @@
+<h2>Available Scholarships</h2>
+
+{% for scholarship in scholarships %}
+
+<h3>{{ scholarship.title }}</h3>
+<p>{{ scholarship.description }}</p>
+<p>Amount: {{ scholarship.amount }}</p>
+<p>Deadline: {{ scholarship.deadline }}</p>
+
+<a href="/scholarships/apply/{{ scholarship.id }}/">Apply</a>
+
+<hr>
+
+{% endfor %}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="hero text-center p-5 text-white" style="background:linear-gradient(120deg,#0b4c8c,#1e88e5);">
+
+<h1>Student Scholarship Portal</h1>
+
+<p>Find and apply for scholarships easily</p>
+
+<a href="/scholarships/" class="btn btn-light btn-lg mt-3">Browse Scholarships</a>
+
+</div>
+
+
+<br><br>
+
+<div class="container">
+
+<div class="row text-center">
+
+<div class="col-md-4">
+
+<h3>🎓 Scholarships</h3>
+
+<p>Find government and private scholarships available for students.</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h3>📝 Easy Application</h3>
+
+<p>Apply online and upload your documents securely.</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h3>📊 Track Status</h3>
+
+<p>Check your application status from the student dashboard.</p>
+
+</div>
+
+</div>
+
+<br><br>
+
+<h2 class="text-center">Latest Scholarships</h2>
+
+<br>
+
+<div class="row">
+
+{% for s in scholarships %}
+
+<div class="col-md-4">
+
+<div class="card p-3 mb-3">
+
+<h4>{{ s.title }}</h4>
+
+<p>{{ s.description|truncatewords:15 }}</p>
+
+<p><b>Amount:</b> ₹{{ s.amount }}</p>
+
+<a href="/scholarships/apply/{{ s.id }}" class="btn btn-success">Apply</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

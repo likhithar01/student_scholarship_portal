@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Admin Dashboard</h2>
+
+<table class="table">
+
+<tr>
+
+<th>Student</th>
+
+<th>Scholarship</th>
+
+<th>Status</th>
+
+<th>Document</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for app in applications %}
+
+<tr>
+
+<td>{{ app.user.username }}</td>
+
+<td>{{ app.scholarship.title }}</td>
+
+<td>{{ app.status }}</td>
+
+<td>
+<a href="{{ app.document.url }}">View</a>
+</td>
+
+<td>
+
+<a href="/scholarships/approve/{{ app.id }}" class="btn btn-success">Approve</a>
+
+<a href="/scholarships/reject/{{ app.id }}" class="btn btn-danger">Reject</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
