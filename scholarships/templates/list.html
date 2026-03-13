@@ -2,9 +2,13 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<h2 class="mb-4">Available Scholarships</h2>
 
-<h2 class="text-center mb-5">Available Scholarships</h2>
+<form method="GET" class="mb-4">
+
+<input type="text" name="search" class="form-control" placeholder="Search scholarships">
+
+</form>
 
 <div class="row">
 
@@ -12,34 +16,24 @@
 
 <div class="col-md-4">
 
-<div class="card shadow-lg mb-4 border-0">
+<div class="card shadow mb-4">
 
 <div class="card-body">
 
-<h5 class="card-title text-primary fw-bold">
+<h5 class="card-title text-primary">
 {{ scholarship.title }}
 </h5>
 
-<p class="card-text">
-{{ scholarship.description }}
-</p>
+<p>{{ scholarship.description }}</p>
 
-<hr>
+<p><b>Amount:</b> ₹{{ scholarship.amount }}</p>
 
-<p>
-<strong>Amount:</strong> ₹{{ scholarship.amount }}
-</p>
+<p><b>Eligibility:</b> {{ scholarship.eligibility }}</p>
 
-<p>
-<strong>Eligibility:</strong> {{ scholarship.eligibility }}
-</p>
+<p><b>Deadline:</b> {{ scholarship.deadline }}</p>
 
-<p>
-<strong>Deadline:</strong> {{ scholarship.deadline }}
-</p>
-
-<a href="#" class="btn btn-primary w-100">
-Apply Now
+<a href="/apply/{{ scholarship.id }}/" class="btn btn-primary">
+Apply
 </a>
 
 </div>
@@ -48,16 +42,33 @@ Apply Now
 
 </div>
 
-{% empty %}
-
-<div class="text-center">
-<p>No scholarships available.</p>
-</div>
-
 {% endfor %}
 
 </div>
 
-</div>
+
+<nav>
+
+<ul class="pagination">
+
+{% if scholarships.has_previous %}
+<li class="page-item">
+<a class="page-link" href="?page={{ scholarships.previous_page_number }}">Previous</a>
+</li>
+{% endif %}
+
+<li class="page-item">
+<a class="page-link">{{ scholarships.number }}</a>
+</li>
+
+{% if scholarships.has_next %}
+<li class="page-item">
+<a class="page-link" href="?page={{ scholarships.next_page_number }}">Next</a>
+</li>
+{% endif %}
+
+</ul>
+
+</nav>
 
 {% endblock %}

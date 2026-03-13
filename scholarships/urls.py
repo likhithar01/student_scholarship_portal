@@ -3,14 +3,10 @@ from . import views
 
 urlpatterns = [
 
-path('',views.scholarship_list),
+    path('', views.scholarship_list, name='scholarships'),
 
-path('apply/<int:id>/',views.apply_scholarship),
+    path('apply/<int:id>/', views.apply_scholarship, name='apply'),
 
-path('admin-dashboard/',views.admin_dashboard),
-
-path('approve/<int:id>/',views.approve_application),
-
-path('reject/<int:id>/',views.reject_application),
+    path('dashboard/', views.dashboard, name='dashboard'),
 
 ]
