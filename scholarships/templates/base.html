@@ -1,71 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Student Scholarship Portal</title>
 
-<title>Student Scholarship Portal</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-
-body{
-background:#f5f7fa;
-}
-
-.navbar{
-background:#0b4c8c;
-}
-
-.navbar-brand{
-font-weight:bold;
-color:white !important;
-}
-
-.nav-link{
-color:white !important;
-margin-left:15px;
-}
-
-.hero{
-background:linear-gradient(120deg,#0b4c8c,#1e88e5);
-color:white;
-padding:80px 0;
-text-align:center;
-}
-
-footer{
-background:#0b4c8c;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
-
-.container-content{
-margin-top:40px;
-}
-
-</style>
-
+    <style>
+        body{
+            background:#f5f7fb;
+        }
+        .navbar{
+            background:#0d6efd;
+        }
+        .navbar a{
+            color:white !important;
+            font-weight:500;
+        }
+        footer{
+            background:#0d3b66;
+            color:white;
+            padding:15px;
+            text-align:center;
+            margin-top:40px;
+        }
+    </style>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg">
-
 <div class="container">
 
-<a class="navbar-brand" href="/">Scholarship Portal</a>
+<a class="navbar-brand text-white fw-bold" href="/">Scholarship Portal</a>
 
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
 <span class="navbar-toggler-icon"></span>
-
 </button>
 
-<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+<div class="collapse navbar-collapse justify-content-end" id="menu">
 
 <ul class="navbar-nav">
 
@@ -77,18 +50,6 @@ margin-top:40px;
 <a class="nav-link" href="/scholarships/">Scholarships</a>
 </li>
 
-{% if request.user.is_authenticated %}
-
-<li class="nav-item">
-<a class="nav-link" href="/dashboard/">Dashboard</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="/logout/">Logout</a>
-</li>
-
-{% else %}
-
 <li class="nav-item">
 <a class="nav-link" href="/login/">Login</a>
 </li>
@@ -97,42 +58,20 @@ margin-top:40px;
 <a class="nav-link" href="/register/">Register</a>
 </li>
 
-{% endif %}
-
-{% if request.user.is_superuser %}
-
-<li class="nav-item">
-<a class="btn btn-warning ms-3" href="/scholarships/admin-dashboard/">Admin</a>
-</li>
-
-{% endif %}
-
 </ul>
 
 </div>
-
 </div>
-
 </nav>
 
-
-<div class="container container-content">
-
+<div class="container mt-4">
 {% block content %}
-
 {% endblock %}
-
 </div>
 
-
 <footer>
-
-<p>© 2026 Student Scholarship Portal</p>
-
+© 2026 Student Scholarship Portal
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>
