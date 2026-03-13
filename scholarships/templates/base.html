@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Scholarship Portal</title>
+<title>Student Scholarship Portal</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        body{
-            background:#f5f7fb;
-        }
-        .navbar{
-            background:#0d6efd;
-        }
-        .navbar a{
-            color:white !important;
-            font-weight:500;
-        }
-        footer{
-            background:#0d3b66;
-            color:white;
-            padding:15px;
-            text-align:center;
-            margin-top:40px;
-        }
-    </style>
+<style>
+body{
+background:#f5f7fb;
+}
+
+.navbar{
+background:#0d6efd;
+}
+
+.navbar a{
+color:white !important;
+font-weight:500;
+}
+
+.footer{
+background:#0d3b66;
+color:white;
+padding:20px;
+text-align:center;
+margin-top:40px;
+}
+</style>
 </head>
 
 <body>
@@ -65,13 +67,15 @@
 </nav>
 
 <div class="container mt-4">
+
 {% block content %}
 {% endblock %}
+
 </div>
 
-<footer>
+<div class="footer">
 © 2026 Student Scholarship Portal
-</footer>
+</div>
 
 </body>
 </html>
