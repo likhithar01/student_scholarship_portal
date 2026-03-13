@@ -1,14 +1,63 @@
-<h2>Available Scholarships</h2>
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-5">Available Scholarships</h2>
+
+<div class="row">
 
 {% for scholarship in scholarships %}
 
-<h3>{{ scholarship.title }}</h3>
-<p>{{ scholarship.description }}</p>
-<p>Amount: {{ scholarship.amount }}</p>
-<p>Deadline: {{ scholarship.deadline }}</p>
+<div class="col-md-4">
 
-<a href="/scholarships/apply/{{ scholarship.id }}/">Apply</a>
+<div class="card shadow-lg mb-4 border-0">
+
+<div class="card-body">
+
+<h5 class="card-title text-primary fw-bold">
+{{ scholarship.title }}
+</h5>
+
+<p class="card-text">
+{{ scholarship.description }}
+</p>
 
 <hr>
 
+<p>
+<strong>Amount:</strong> ₹{{ scholarship.amount }}
+</p>
+
+<p>
+<strong>Eligibility:</strong> {{ scholarship.eligibility }}
+</p>
+
+<p>
+<strong>Deadline:</strong> {{ scholarship.deadline }}
+</p>
+
+<a href="#" class="btn btn-primary w-100">
+Apply Now
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="text-center">
+<p>No scholarships available.</p>
+</div>
+
 {% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}
