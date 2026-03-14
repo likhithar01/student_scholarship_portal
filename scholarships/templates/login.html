@@ -1,22 +1,16 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 {% block content %}
 
 <h2>Login</h2>
 
 <form method="POST">
-
 {% csrf_token %}
 
-<div class="mb-3">
-<label>Username</label>
-<input type="text" name="username" class="form-control">
-</div>
+<input name="username" class="form-control" placeholder="Username">
+<br>
 
-<div class="mb-3">
-<label>Password</label>
-<input type="password" name="password" class="form-control">
-</div>
+<input name="password" type="password" class="form-control" placeholder="Password">
+<br>
 
 <button class="btn btn-primary">Login</button>
 
