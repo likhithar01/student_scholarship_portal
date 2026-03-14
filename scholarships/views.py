@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from .models import Scholarship
 
+def home(request):
+    scholarships = Scholarship.objects.all()[:3]
+    return render(request, 'home.html', {'scholarships': scholarships})
 
-def scholarship_list(request):
 
-    scholarships = Scholarship.objects.all()
+def scholarships(request):
+    query = request.GET.get('q')
 
-    return render(request, 'scholarships/list.html', {
-        'scholarships': scholarships
-    })
+    if query:
+        scholarships = Scholarship.objects.filter(title__icontains=query)
+    else:
+        scholarships = Scholarship.objects.all()
+
+    return render(request, 'scholarships.html', {'scholarships': scholarships})

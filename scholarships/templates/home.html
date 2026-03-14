@@ -1,201 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
+
 <title>Student Scholarship Portal</title>
 
-<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-
-body{
-background:#f4f6f9;
-}
-
-.navbar{
-background:#1f4e8c;
-}
-
-.navbar-brand{
-color:white;
-font-weight:bold;
-}
-
-.navbar-nav .nav-link{
-color:white !important;
-margin-right:15px;
-}
-
-.hero{
-background:linear-gradient(90deg,#1f4e8c,#2d7dd2);
-color:white;
-padding:80px;
-text-align:center;
-border-radius:5px;
-}
-
-.hero h1{
-font-size:45px;
-font-weight:bold;
-}
-
-.hero p{
-font-size:18px;
-}
-
-.hero button{
-margin-top:20px;
-}
-
-.features{
-margin-top:60px;
-text-align:center;
-}
-
-.features h3{
-font-weight:bold;
-}
-
-.feature-box{
-padding:20px;
-}
-
-.latest{
-margin-top:60px;
-}
-
-.card{
-border-radius:8px;
-}
-
-</style>
 </head>
 
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-dark bg-primary">
 <div class="container">
 
-<a class="navbar-brand" href="#">Scholarship Portal</a>
+<a class="navbar-brand" href="/">Scholarship Portal</a>
 
-<ul class="navbar-nav ms-auto">
-<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Scholarships</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
-<li class="nav-item">
-<a class="btn btn-warning" href="#">Admin</a>
-</li>
-</ul>
+<a class="btn btn-light" href="/scholarships/">Browse Scholarships</a>
 
 </div>
 </nav>
 
+<div class="container mt-5">
 
-<div class="container mt-4">
-
-<!-- Hero Section -->
-<div class="hero">
+<div class="p-5 text-center bg-primary text-white rounded">
 
 <h1>Student Scholarship Portal</h1>
 
 <p>Find and apply for scholarships easily</p>
 
-<a href="#" class="btn btn-light btn-lg">
-Browse Scholarships
-</a>
+<a class="btn btn-light" href="/scholarships/">Browse Scholarships</a>
 
 </div>
 
+<h2 class="mt-5 text-center">Latest Scholarships</h2>
 
-<!-- Features -->
-<div class="row features">
+<div class="row mt-4">
 
-<div class="col-md-4 feature-box">
-
-<h3>🎓 Scholarships</h3>
-
-<p>
-Find government and private scholarships available for students.
-</p>
-
-</div>
-
-<div class="col-md-4 feature-box">
-
-<h3>📝 Easy Application</h3>
-
-<p>
-Apply online and upload your documents securely.
-</p>
-
-</div>
-
-<div class="col-md-4 feature-box">
-
-<h3>📊 Track Status</h3>
-
-<p>
-Check your application status from the student dashboard.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- Latest Scholarships -->
-<div class="latest">
-
-<h2 class="text-center mb-4">Latest Scholarships</h2>
-
-<div class="row">
+{% for scholarship in scholarships %}
 
 <div class="col-md-4">
 
 <div class="card p-3">
 
-<h5>Merit Scholarship</h5>
+<h5>{{ scholarship.title }}</h5>
 
-<p>
-Scholarship for students with excellent academic performance.
-</p>
+<p>{{ scholarship.description }}</p>
 
 </div>
 
 </div>
 
-<div class="col-md-4">
-
-<div class="card p-3">
-
-<h5>Need Based Scholarship</h5>
-
-<p>
-Financial support for students from low income families.
-</p>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card p-3">
-
-<h5>Sports Scholarship</h5>
-
-<p>
-Scholarships for students with outstanding sports achievements.
-</p>
-
-</div>
-
-</div>
-
-</div>
+{% endfor %}
 
 </div>
 
