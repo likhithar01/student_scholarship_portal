@@ -1,79 +1,109 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
-<div class="hero text-center p-5 text-white" style="background:linear-gradient(120deg,#0b4c8c,#1e88e5);">
-
-<h1>Student Scholarship Portal</h1>
-
-<p>Find and apply for scholarships easily</p>
-
-<a href="/scholarships/" class="btn btn-light btn-lg mt-3">Browse Scholarships</a>
-
-</div>
-
-
-<br><br>
-
 <div class="container">
 
-<div class="row text-center">
+<!-- HERO SECTION -->
+
+<div class="p-5 mb-5 bg-light rounded-3 shadow">
+
+<div class="container-fluid py-5">
+
+<h1 class="display-5 fw-bold">
+🎓 Student Scholarship Portal
+</h1>
+
+<p class="col-md-8 fs-5">
+
+Welcome to the Student Scholarship Portal.  
+Find scholarships, apply online, and track your applications easily.
+
+</p>
+
+<a href="/scholarships/" class="btn btn-primary btn-lg">
+
+Browse Scholarships
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- STATISTICS SECTION -->
+
+<div class="row text-center mb-5">
 
 <div class="col-md-4">
 
-<h3>🎓 Scholarships</h3>
+<div class="card shadow">
 
-<p>Find government and private scholarships available for students.</p>
+<div class="card-body">
+
+<h2 class="text-primary">50+</h2>
+
+<p>Scholarships Available</p>
 
 </div>
+
+</div>
+
+</div>
+
 
 <div class="col-md-4">
 
-<h3>📝 Easy Application</h3>
+<div class="card shadow">
 
-<p>Apply online and upload your documents securely.</p>
+<div class="card-body">
+
+<h2 class="text-success">200+</h2>
+
+<p>Students Registered</p>
 
 </div>
+
+</div>
+
+</div>
+
 
 <div class="col-md-4">
 
-<h3>📊 Track Status</h3>
+<div class="card shadow">
 
-<p>Check your application status from the student dashboard.</p>
+<div class="card-body">
 
-</div>
+<h2 class="text-warning">₹10L+</h2>
 
-</div>
-
-<br><br>
-
-<h2 class="text-center">Latest Scholarships</h2>
-
-<br>
-
-<div class="row">
-
-{% for s in scholarships %}
-
-<div class="col-md-4">
-
-<div class="card p-3 mb-3">
-
-<h4>{{ s.title }}</h4>
-
-<p>{{ s.description|truncatewords:15 }}</p>
-
-<p><b>Amount:</b> ₹{{ s.amount }}</p>
-
-<a href="/scholarships/apply/{{ s.id }}" class="btn btn-success">Apply</a>
+<p>Scholarships Distributed</p>
 
 </div>
 
 </div>
 
-{% endfor %}
+</div>
 
 </div>
+
+
+<!-- ABOUT SECTION -->
+
+<div class="card shadow p-4 mb-5">
+
+<h3>About This Portal</h3>
+
+<p>
+
+The Student Scholarship Portal helps students discover scholarships and apply online.
+Our goal is to simplify access to financial aid for education.
+
+</p>
+
+</div>
+
 
 </div>
 
