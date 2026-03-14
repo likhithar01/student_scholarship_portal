@@ -2,10 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-
     path('admin/', admin.site.urls),
 
-    path('scholarships/', include('scholarships.urls')),
-
+    # connect scholarships app
+    path('', include('scholarships.urls')),
 ]
-
