@@ -1,19 +1,17 @@
 from django.shortcuts import render, redirect
 from .models import Scholarship, Application
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 
 
 def home(request):
-    return render(request, 'home.html')
+    query = request.GET.get('q')
+    scholarships = Scholarship.objects.all()
 
-
-def scholarships(request):
-    query = request.GET.get('q', '')
     if query:
-        scholarships_list = Scholarship.objects.filter(title__icontains=query)
-    else:
-        scholarships_list = Scholarship.objects.all()
-    return render(request, 'scholarships.html', {'scholarships': scholarships_list})
+        scholarships = scholarships.filter(title__icontains=query)
+
+    return render(request, 'home.html', {'scholarships': scholarships})
 
 
 @login_required
@@ -21,27 +19,37 @@ def apply(request, id):
     scholarship = Scholarship.objects.get(id=id)
 
     if request.method == 'POST':
-        full_name = request.POST.get('full_name', '').strip()
-        email = request.POST.get('email', '').strip()
-        marks = request.POST.get('marks')
-        income = request.POST.get('income')
-        document = request.FILES.get('document')
+        marks = int(request.POST['marks'])
+        income = int(request.POST['income'])
 
-        if not all([full_name, email, marks, income, document]):
+        # Eligibility check
+        eligible = marks >= scholarship.min_marks and income <= scholarship.max_income
+
+        if not eligible:
             return render(request, 'apply.html', {
                 'scholarship': scholarship,
-                'error': 'All fields are required.',
+                'error': 'You are not eligible for this scholarship'
             })
 
         Application.objects.create(
             user=request.user,
             scholarship=scholarship,
-            full_name=full_name,
-            email=email,
-            marks=int(marks),
-            income=int(income),
-            document=document
+            full_name=request.POST['full_name'],
+            email=request.POST['email'],
+            marks=marks,
+            income=income,
+            document=request.FILES['document']
         )
+
+        # Email (console for now)
+        send_mail(
+            'Application Submitted',
+            'Your scholarship application was submitted successfully.',
+            'from@example.com',
+            [request.POST['email']],
+            fail_silently=True,
+        )
+
         return redirect('dashboard')
 
     return render(request, 'apply.html', {'scholarship': scholarship})

@@ -1,34 +1,25 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
-<!-- Hero Section -->
-<div class="hero">
-    <h1>Find & Apply for Scholarships</h1>
-    <p>Simple. Fast. Transparent.</p>
-</div>
+<h2>Scholarships</h2>
 
-<!-- Scholarships List -->
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Available Scholarships</h2>
+<form method="GET" class="mb-3">
+    <input type="text" name="q" placeholder="Search scholarships..." class="form-control">
+</form>
 
-    <div class="row">
-        {% for s in scholarships %}
-        <div class="col-md-4">
-            <div class="card p-4 mb-4">
-                <h5>{{ s.title }}</h5>
-                <p>{{ s.description }}</p>
+<div class="row">
+    {% for s in scholarships %}
+    <div class="col-md-4">
+        <div class="card p-3 mb-3">
+            <h5>{{ s.title }}</h5>
+            <p>{{ s.description }}</p>
+            <p><b>Min Marks:</b> {{ s.min_marks }}</p>
+            <p><b>Max Income:</b> {{ s.max_income }}</p>
 
-                <p><strong>Eligibility:</strong> {{ s.eligibility }}</p>
-                <p><strong>Deadline:</strong> {{ s.deadline }}</p>
-
-                <a href="/apply/{{ s.id }}" class="btn btn-primary">Apply</a>
-            </div>
+            <a href="/apply/{{ s.id }}" class="btn btn-primary">Apply</a>
         </div>
-        {% empty %}
-        <p>No scholarships available</p>
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
 
 {% endblock %}

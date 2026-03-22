@@ -1,25 +1,22 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
 {% block content %}
 
-<h2 class="mb-4">My Applications</h2>
-
-<table class="table table-bordered">
-
-<tr>
-<th>Scholarship</th>
-<th>Applied On</th>
-</tr>
+<h2>Your Applications</h2>
 
 {% for app in applications %}
+<div class="card p-3 mb-3">
+    <h5>{{ app.scholarship.title }}</h5>
 
-<tr>
-<td>{{ app.scholarship.title }}</td>
-<td>{{ app.applied_on }}</td>
-</tr>
-
+    <strong>Status:
+        {% if app.status == 'Pending' %}
+            <span class="text-warning">Pending</span>
+        {% elif app.status == 'Approved' %}
+            <span class="text-success">Approved</span>
+        {% else %}
+            <span class="text-danger">Rejected</span>
+        {% endif %}
+    </strong>
+</div>
 {% endfor %}
-
-</table>
 
 {% endblock %}

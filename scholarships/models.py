@@ -6,6 +6,8 @@ class Scholarship(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     eligibility = models.CharField(max_length=200)
+    min_marks = models.IntegerField(default=0)
+    max_income = models.IntegerField(default=1000000)
     deadline = models.DateField()
 
     def __str__(self):
@@ -30,6 +32,3 @@ class Application(models.Model):
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
     applied_on = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.full_name} - {self.scholarship.title}"
