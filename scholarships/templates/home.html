@@ -13,11 +13,16 @@
         <div class="card p-3 mb-3">
             <h5>{{ s.title }}</h5>
             <p>{{ s.description }}</p>
-            <p><b>Min Marks:</b> {{ s.min_marks }}</p>
-            <p><b>Max Income:</b> {{ s.max_income }}</p>
+            <p><b>Eligibility:</b> {{ s.eligibility }}</p>
+            <p><b>Deadline:</b> {{ s.deadline }}</p>
 
-            <a href="/apply/{{ s.id }}" class="btn btn-primary">Apply</a>
+            <a href="/apply/{{ s.id }}/" class="btn btn-primary">Apply</a>
         </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
     </div>
     {% endfor %}
 </div>
