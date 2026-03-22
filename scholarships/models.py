@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Scholarship(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -12,9 +13,23 @@ class Scholarship(models.Model):
 
 
 class Application(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     scholarship = models.ForeignKey(Scholarship, on_delete=models.CASCADE)
-    applied_date = models.DateField(auto_now_add=True)
+
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    marks = models.IntegerField()
+    income = models.IntegerField()
+    document = models.FileField(upload_to='documents/')
+
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    applied_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.student.username} - {self.scholarship.title}"
+        return f"{self.full_name} - {self.scholarship.title}"
