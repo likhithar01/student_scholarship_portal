@@ -1,25 +1,39 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-<h2>Scholarships</h2>
+<div class="container mt-4">
 
-<form method="GET" class="mb-3">
-    <input type="text" name="q" placeholder="Search scholarships..." class="form-control">
-</form>
+    <h2>Scholarships</h2>
 
-<div class="row">
-    {% for s in scholarships %}
-    <div class="col-md-4">
-        <div class="card p-3 mb-3">
-            <h5>{{ s.title }}</h5>
-            <p>{{ s.description }}</p>
-            <p><b>Eligibility:</b> {{ s.eligibility }}</p>
-            <p><b>Deadline:</b> {{ s.deadline }}</p>
+    <form method="GET" class="mb-3">
+        <input type="text" name="q" placeholder="Search..." class="form-control mb-2">
 
-            <a href="/apply/{{ s.id }}/" class="btn btn-primary">Apply</a>
-        </div>
+        <select name="category" class="form-control mb-2">
+            <option value="">All Categories</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Medical">Medical</option>
+            <option value="Arts">Arts</option>
+            <option value="Internship">Internship</option>
+            <option value="Government">Government</option>
+        </select>
+
+        <button class="btn btn-primary w-100">Filter</button>
+    </form>
+
+    {% for scholarship in scholarships %}
+    <div class="card p-3 mb-3">
+        <h4>{{ scholarship.title }}</h4>
+        <p>{{ scholarship.description }}</p>
+        <p><b>Eligibility:</b> {{ scholarship.eligibility }}</p>
+        <p><b>Amount:</b> ₹{{ scholarship.amount }}</p>
+        <p><b>Deadline:</b> {{ scholarship.deadline }}</p>
+        <p><b>Category:</b> {{ scholarship.category }}</p>
+
+        <a href="{% url 'apply' scholarship.id %}" class="btn btn-success">Apply</a>
     </div>
     {% endfor %}
+
 </div>
 
 {% endblock %}
