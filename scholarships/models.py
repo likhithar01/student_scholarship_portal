@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class Scholarship(models.Model):
     CATEGORY_CHOICES = [
-        ('Engineering', 'Engineering'),
-        ('Medical', 'Medical'),
-        ('Arts', 'Arts'),
+        ('AI', 'AI'),
+        ('Web', 'Web Development'),
+        ('Data', 'Data Science'),
+        ('Govt', 'Government'),
         ('Internship', 'Internship'),
-        ('Government', 'Government'),
     ]
 
     title = models.CharField(max_length=200)
@@ -16,9 +16,7 @@ class Scholarship(models.Model):
     eligibility = models.CharField(max_length=200, default="General")
     amount = models.IntegerField(default=0)
     deadline = models.DateField()
-
-    # ✅ NEW FIELD
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='Engineering')
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='AI')
 
     def __str__(self):
         return self.title

@@ -1,70 +1,39 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-
-from scholarships.models import Scholarship, Application
 
 
-def home(request):
-
-    scholarships = Scholarship.objects.all()[:6]
-
-    return render(request, 'home.html', {
-        'scholarships': scholarships
-    })
-
-
-def register(request):
-
+def register_view(request):
     if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
+        if User.objects.filter(username=username).exists():
+            return render(request, 'register.html', {'error': 'User already exists'})
 
-        User.objects.create_user(
-            username=username,
-            email=email,
-            password=password
-        )
-
-        return redirect('/login/')
+        user = User.objects.create_user(username=username, password=password)
+        login(request, user)
+        return redirect('scholarships')
 
     return render(request, 'register.html')
 
 
-def user_login(request):
-
+def login_view(request):
     if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        username = request.POST['username']
-        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
 
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
+        if user is None:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
 
-        if user:
-            login(request, user)
-            return redirect('/dashboard/')
+        login(request, user)
+        return redirect('dashboard')
 
     return render(request, 'login.html')
 
 
-def user_logout(request):
-
+def logout_view(request):
     logout(request)
-    return redirect('/')
-
-
-@login_required
-def dashboard(request):
-
-    applications = Application.objects.filter(user=request.user)
-
-    return render(request, 'dashboard.html', {
-        'applications': applications
-    })
+    return redirect('login')

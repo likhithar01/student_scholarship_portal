@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add Scholarship</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input class="form-control mt-2" name="title" placeholder="Title">
+    <textarea class="form-control mt-2" name="description" placeholder="Description"></textarea>
+    <input class="form-control mt-2" name="eligibility" placeholder="Eligibility">
+    <input class="form-control mt-2" name="deadline" type="date">
+    <input class="form-control mt-2" name="amount" type="number" placeholder="Amount">
+
+    <button class="btn btn-success mt-3">Save</button>
+</form>
+
+{% endblock %}

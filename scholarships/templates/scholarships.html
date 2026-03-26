@@ -1,21 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Browse Scholarships</h2>
+<div class="container mt-4">
 
-<form method="GET">
-<input class="form-control" name="q" placeholder="Search scholarships">
-<button class="btn btn-primary mt-2">Search</button>
+<h2 class="mb-3">🎓 Scholarships</h2>
+
+<form method="GET" class="row g-2">
+    <div class="col-md-5">
+        <input class="form-control" name="q" placeholder="Search scholarships">
+    </div>
+
+    <div class="col-md-4">
+        <select class="form-control" name="category">
+            <option value="">All Categories</option>
+            <option value="AI">AI</option>
+            <option value="Web">Web Development</option>
+            <option value="Data">Data Science</option>
+            <option value="Govt">Government</option>
+            <option value="Internship">Internship</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <button class="btn btn-primary w-100">Filter</button>
+    </div>
 </form>
 
+<hr>
+
 {% for s in scholarships %}
-<div class="card mt-3 p-3">
-<h4>{{ s.title }}</h4>
-<p>{{ s.description }}</p>
-<p>Eligibility: {{ s.eligibility }}</p>
-<p>Deadline: {{ s.deadline }}</p>
-<a href="/apply/{{ s.id }}/" class="btn btn-success">Apply</a>
+<div class="card shadow-sm mt-3 p-3">
+    <h4>{{ s.title }}</h4>
+    <p>{{ s.description }}</p>
+
+    <div class="row">
+        <div class="col"><b>🎯 Eligibility:</b> {{ s.eligibility }}</div>
+        <div class="col"><b>💰 ₹{{ s.amount }}</b></div>
+        <div class="col"><b>📅 {{ s.deadline }}</b></div>
+    </div>
+
+    <p class="mt-2"><b>Category:</b> {{ s.category }}</p>
+
+    <a href="/apply/{{ s.id }}/" class="btn btn-success mt-2">Apply</a>
 </div>
 {% endfor %}
+
+</div>
 
 {% endblock %}
