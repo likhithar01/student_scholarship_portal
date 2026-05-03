@@ -1,39 +1,78 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
-<div class="container mt-4">
+<!-- Hero Banner -->
+<div style="background:linear-gradient(135deg,#667eea,#764ba2); color:white; padding:60px 20px; text-align:center;">
+  <h1 style="font-size:42px; font-weight:800; margin-bottom:15px;">🎓 Student Scholarship Portal</h1>
+  <p style="font-size:18px; opacity:0.9; max-width:600px; margin:0 auto;">Find the perfect scholarship for your education journey. Apply today and shape your future!</p>
+</div>
 
-    <h2>Scholarships</h2>
+<!-- Search & Filter -->
+<div style="background:#f8f9fa; padding:30px 20px;">
+  <div class="container">
+    <form method="GET">
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:center;">
+        
+        <input type="text" name="q" value="{{ request.GET.q }}" placeholder="🔍 Search scholarships..."
+               style="flex:1; min-width:200px; padding:12px 16px; border-radius:8px; border:2px solid #ddd; font-size:15px;">
 
-    <form method="GET" class="mb-3">
-        <input type="text" name="q" placeholder="Search..." class="form-control mb-2">
-
-        <select name="category" class="form-control mb-2">
-            <option value="">All Categories</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Medical">Medical</option>
-            <option value="Arts">Arts</option>
-            <option value="Internship">Internship</option>
-            <option value="Government">Government</option>
+        <select name="category" style="padding:12px 16px; border-radius:8px; border:2px solid #ddd; font-size:15px; min-width:180px;">
+          <option value="">All Categories</option>
+          <option value="Engineering" {% if request.GET.category == 'Engineering' %}selected{% endif %}>Engineering</option>
+          <option value="Medical" {% if request.GET.category == 'Medical' %}selected{% endif %}>Medical</option>
+          <option value="Arts" {% if request.GET.category == 'Arts' %}selected{% endif %}>Arts</option>
+          <option value="Internship" {% if request.GET.category == 'Internship' %}selected{% endif %}>Internship</option>
+          <option value="Government" {% if request.GET.category == 'Government' %}selected{% endif %}>Government</option>
         </select>
 
-        <button class="btn btn-primary w-100">Filter</button>
+        <button type="submit" style="padding:12px 30px; background:linear-gradient(135deg,#667eea,#764ba2); color:white; border:none; border-radius:8px; font-size:15px; font-weight:600; cursor:pointer;">
+          Filter
+        </button>
+
+      </div>
     </form>
+  </div>
+</div>
 
-    {% for scholarship in scholarships %}
-    <div class="card p-3 mb-3">
-        <h4>{{ scholarship.title }}</h4>
-        <p>{{ scholarship.description }}</p>
-        <p><b>Eligibility:</b> {{ scholarship.eligibility }}</p>
-        <p><b>Amount:</b> ₹{{ scholarship.amount }}</p>
-        <p><b>Deadline:</b> {{ scholarship.deadline }}</p>
-        <p><b>Category:</b> {{ scholarship.category }}</p>
+<!-- Scholarships List -->
+<div class="container mt-4 mb-5">
+  <h4 style="color:#555; margin-bottom:20px;">📋 Available Scholarships ({{ scholarships|length }} found)</h4>
 
-        <a href="{% url 'apply' scholarship.id %}" class="btn btn-success">Apply</a>
+  {% for scholarship in scholarships %}
+  <div style="background:white; border-radius:12px; padding:25px; margin-bottom:20px; box-shadow:0 4px 15px rgba(0,0,0,0.08); border-left:5px solid #667eea; transition:transform 0.2s;">
+    
+    <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:10px;">
+      <div>
+        <h4 style="color:#333; font-weight:700; margin:0 0 8px;">{{ scholarship.title }}</h4>
+        <span style="background:#f0f0ff; color:#667eea; padding:4px 12px; border-radius:20px; font-size:13px; font-weight:600;">
+          {{ scholarship.category }}
+        </span>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:24px; font-weight:800; color:#11998e;">₹{{ scholarship.amount }}</div>
+        <div style="font-size:13px; color:#888;">📅 Deadline: {{ scholarship.deadline }}</div>
+      </div>
     </div>
-    {% endfor %}
 
+    <p style="color:#666; margin:15px 0; line-height:1.6;">{{ scholarship.description }}</p>
+
+    <div style="background:#f8f9fa; padding:10px 15px; border-radius:8px; margin-bottom:15px;">
+      <b style="color:#555;">✅ Eligibility:</b> <span style="color:#666;">{{ scholarship.eligibility }}</span>
+    </div>
+
+    <a href="{% url 'apply' scholarship.id %}" 
+       style="display:inline-block; padding:10px 30px; background:linear-gradient(135deg,#11998e,#38ef7d); color:white; border-radius:8px; font-weight:600; text-decoration:none;">
+      Apply Now →
+    </a>
+
+  </div>
+  {% empty %}
+  <div style="text-align:center; padding:60px; color:#888;">
+    <div style="font-size:60px;">🔍</div>
+    <h4>No scholarships found</h4>
+    <p>Try different search terms or categories</p>
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}
