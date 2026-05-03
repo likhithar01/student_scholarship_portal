@@ -37,4 +37,4 @@ pip install -r requirements.txt
 python manage.py runserver
 
 Then open:
-http://127.0.0.1:8000/
+ https://studentscholarship.pythonanywhere.com
